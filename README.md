@@ -127,11 +127,7 @@ mvn -q -Dtest=PostControllerTest test
 ---
 
 ## 📹 Demo Video Script
-1) Login with Cognito (Hosted UI), capture JWT in console (already auto‑stored by frontend).  
-2) Create a post (≤140 chars).  
-3) Show stream feed + user posts.  
-4) Show API Gateway 401 without JWT (open a new private window and hit an endpoint).  
-5) Close with DynamoDB tables populated.
+
 
 ---
 
@@ -139,8 +135,3 @@ mvn -q -Dtest=PostControllerTest test
 - **Day 1:** Monolith + frontend working locally; basic tests; README baseline.  
 - **Day 2:** Cognito + DynamoDB + Lambdas via SAM; API routes; secure with Authorizer.  
 - **Day 3:** Polish UI; video; write architecture & test reports; final README polish.
-
----
-
-## 📁 Credits / Autores
-Equipo (máx 3). Añade nombres, correos y roles aquí.
