@@ -1,0 +1,127 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Stream microservices (users, streams, posts) with Cognito authorizer
+
+Parameters:
+  UsersTableName:
+    Type: String
+    Default: Users
+  StreamsTableName:
+    Type: String
+    Default: Streams
+  PostsTableName:
+    Type: String
+    Default: Posts
+  UserPoolArn:
+    Type: String
+    Description: ARN of Cognito User Pool for JWT authorizer
+
+Resources:
+  Api:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      CorsConfiguration:
+        AllowOrigins: ['*']
+        AllowHeaders: ['*']
+        AllowMethods: ['GET','POST','OPTIONS']
+      Auth:
+        Authorizers:
+          CognitoAuthorizer:
+            JwtConfiguration:
+              issuer: https://cognito-idp.${AWS::Region}.amazonaws.com/${UserPoolArn}
+              audience:
+                - dummy # replace with App Client ID at deploy time or wire via parameter
+            IdentitySource: "$request.header.Authorization"
+
+  UsersFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: users/
+      Handler: index.handler
+      Runtime: nodejs18.x
+      MemorySize: 256
+      Timeout: 10
+      Environment:
+        Variables:
+          USERS_TABLE: !Ref UsersTableName
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref UsersTableName
+      Events:
+        UsersAny:
+          Type: HttpApi
+          Properties:
+            Path: /users
+            Method: ANY
+            ApiId: !Ref Api
+            Auth:
+              Authorizer: CognitoAuthorizer
+
+  StreamsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: streams/
+      Handler: index.handler
+      Runtime: nodejs18.x
+      MemorySize: 256
+      Timeout: 10
+      Environment:
+        Variables:
+          STREAMS_TABLE: !Ref StreamsTableName
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref StreamsTableName
+      Events:
+        StreamsAny:
+          Type: HttpApi
+          Properties:
+            Path: /streams
+            Method: ANY
+            ApiId: !Ref Api
+            Auth:
+              Authorizer: CognitoAuthorizer
+
+  PostsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: posts/
+      Handler: index.handler
+      Runtime: nodejs18.x
+      MemorySize: 256
+      Timeout: 10
+      Environment:
+        Variables:
+          POSTS_TABLE: !Ref PostsTableName
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref PostsTableName
+      Events:
+        PostsRoot:
+          Type: HttpApi
+          Properties:
+            Path: /posts
+            Method: ANY
+            ApiId: !Ref Api
+            Auth:
+              Authorizer: CognitoAuthorizer
+        PostsByStream:
+          Type: HttpApi
+          Properties:
+            Path: /streams/{id}/posts
+            Method: GET
+            ApiId: !Ref Api
+            Auth:
+              Authorizer: CognitoAuthorizer
+        PostsByUser:
+          Type: HttpApi
+          Properties:
+            Path: /users/{id}/posts
+            Method: GET
+            ApiId: !Ref Api
+            Auth:
+              Authorizer: CognitoAuthorizer
+
+Outputs:
+  ApiUrl:
+    Value: !Sub "https://${Api}.execute-api.${AWS::Region}.amazonaws.com"
+    Description: Deployed HTTP API URL

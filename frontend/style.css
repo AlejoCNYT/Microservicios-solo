@@ -1,0 +1,4 @@
+body { font-family: system-ui, Arial, sans-serif; margin: 2rem; max-width: 720px; }
+input { margin: .25rem; padding: .4rem; }
+button { padding: .4rem .8rem; }
+#feed li { margin: .25rem 0; }
