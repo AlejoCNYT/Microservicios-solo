@@ -40,18 +40,34 @@ public class PostController {
         return ResponseEntity.created(URI.create("/api/streams/" + saved.getId())).body(saved);
     }
 
-    public record NewPost(Long userId, Long streamId, String content) {}
+    public static class NewPost {
+    public Long userId;
+    public Long streamId;
+    public String content;
+
+    public NewPost() {}
+    public NewPost(Long userId, Long streamId, String content) {
+        this.userId = userId;
+        this.streamId = streamId;
+        this.content = content;
+    }
+
+    // Métodos tipo record para mantener compatibilidad con req.userId, etc.
+    public Long userId()   { return userId; }
+    public Long streamId() { return streamId; }
+    public String content(){ return content; }
+}
     @PostMapping("/posts")
     public ResponseEntity<Post> createPost(@RequestBody @Valid NewPost req) {
-        if (req.content() == null || req.content().length() > 140) {
+        if (req.content == null || req.content.length() > 140) {
             return ResponseEntity.badRequest().build();
         }
-        User u = users.findById(req.userId()).orElseThrow();
-        StreamTopic st = streams.findById(req.streamId()).orElseThrow();
+        User u = users.findById(req.userId).orElseThrow();
+        StreamTopic st = streams.findById(req.streamId).orElseThrow();
         Post p = new Post();
         p.setUser(u);
         p.setStream(st);
-        p.setContent(req.content());
+        p.setContent(req.content);
         Post saved = posts.save(p);
         return ResponseEntity.created(URI.create("/api/posts/" + saved.getId())).body(saved);
     }
@@ -68,3 +84,4 @@ public class PostController {
         return posts.findTop20ByUserOrderByCreatedAtDesc(u);
     }
 }
+

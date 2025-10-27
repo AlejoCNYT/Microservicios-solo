@@ -1,0 +1,9 @@
+com\example\micro\model\StreamTopic.class
+com\example\micro\repo\StreamRepository.class
+com\example\micro\model\User.class
+com\example\micro\repo\UserRepository.class
+com\example\micro\web\PostController$NewPost.class
+com\example\micro\model\Post.class
+com\example\micro\repo\PostRepository.class
+com\example\micro\MainApplication.class
+com\example\micro\web\PostController.class
