@@ -45,7 +45,7 @@ README.md
 ## 🔧 Local Quickstart (Monolith)
 ### Windows/macOS/Linux
 
-![Uploading imagen.png…]()
+<img width="1460" height="661" alt="imagen" src="https://github.com/user-attachments/assets/42755f06-2cd9-4569-906a-78430f00bfd2" />
 
 ```bash
 # Java 21 + Maven required
