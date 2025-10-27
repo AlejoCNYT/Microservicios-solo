@@ -44,6 +44,9 @@ README.md
 
 ## 🔧 Local Quickstart (Monolith)
 ### Windows/macOS/Linux
+
+![Uploading imagen.png…]()
+
 ```bash
 # Java 21 + Maven required
 cd monolith
