@@ -1,33 +1,12 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>StreamLab</title>
-  <link rel="stylesheet" href="style.css"/>
-</head>
-<body>
-  <h1>StreamLab</h1>
-  <div id="cfg">
-    <label>API_BASE: <input id="apiBase" value="http://localhost:8080/api"/></label>
-  </div>
-
-  <section>
-    <h2>Quick Post</h2>
-    <input id="userId" placeholder="userId" />
-    <input id="streamId" placeholder="streamId" />
-    <input id="content" placeholder="≤140 chars" maxlength="140"/>
-    <button id="send">Post</button>
-    <p id="status"></p>
-  </section>
-
-  <section>
-    <h2>Stream Feed</h2>
-    <input id="qStreamId" placeholder="streamId"/>
-    <button id="loadStream">Load</button>
-    <ul id="feed"></ul>
-  </section>
-
-  <script src="app.js"></script>
-</body>
+﻿<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frontend</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
