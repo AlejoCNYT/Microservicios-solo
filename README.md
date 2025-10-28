@@ -66,11 +66,11 @@ Microservicios-solo/
 
 ## 5) Monolith — Run / Ejecutar
 
-<img width="230" height="118" alt="Captura de pantalla 2025-10-26 204632" src="https://github.com/user-attachments/assets/ac527eaf-0608-4a04-85c6-954249d3c075" />
+<img width="230" height="118" alt="Captura de pantalla 2025-10-26 204632" src="https://github.com/user-attachments/assets/90963502-ca92-45d9-8ad2-5ada93f3d11e" />
 
 ### A) Maven (Windows/macOS/Linux)
 
-<img width="1464" height="656" alt="Captura de pantalla 2025-10-26 193257" src="https://github.com/user-attachments/assets/a764d929-5bc5-4cd1-bb61-66b928761fd9" />
+<img width="1464" height="656" alt="Captura de pantalla 2025-10-26 193257" src="https://github.com/user-attachments/assets/b2a0c196-ff3a-413f-ac3c-d8618ae245d9" />
 
 ```bash
 # From: Microservicios-solo/monolith
@@ -80,7 +80,7 @@ mvn -q -DskipTests spring-boot:run
 
 ### B) Docker (opcional)
 
-<img width="1919" height="958" alt="Captura de pantalla 2025-10-27 205612" src="https://github.com/user-attachments/assets/69fc21e9-7438-4733-a680-06a6d19e3034" />
+<img width="1919" height="958" alt="Captura de pantalla 2025-10-27 205612" src="https://github.com/user-attachments/assets/e6d8d400-2b24-41a9-92e4-47958128956b" />
 
 ```bash
 # Build
@@ -116,11 +116,11 @@ curl -s -X POST http://localhost:8081/api/posts   -H "Content-Type: application/
 
 ## 7) Frontend (Vite) — Build & S3
 
-<img width="1058" height="354" alt="Captura de pantalla 2025-10-26 225412" src="https://github.com/user-attachments/assets/341833d7-3317-40cf-b4ad-844df2ddfa00" />
+<img width="1058" height="354" alt="Captura de pantalla 2025-10-26 225412" src="https://github.com/user-attachments/assets/8ed02844-b313-4f9f-9f87-810852efd444" />
 
 ### 7.1 Build
 
-<img width="613" height="227" alt="Captura de pantalla 2025-10-26 204434" src="https://github.com/user-attachments/assets/b0fbec4a-e30f-4591-abe2-91902f5aca60" />
+<img width="613" height="227" alt="Captura de pantalla 2025-10-26 204434" src="https://github.com/user-attachments/assets/e16365f1-84ce-446d-ad94-fbb4e78ee4e2" />
 
 ```bash
 # From: Microservicios-solo/frontend
@@ -187,9 +187,9 @@ curl -s http://localhost:8081/api/posts | jq '.[:3]'
 ## 10) Step 6 — Split into 3 microservices (design only)  
 **(Sin paso 7: no se despliega en AWS por ahora)**
 
-<img width="1504" height="1003" alt="Captura de pantalla 2025-10-27 205452" src="https://github.com/user-attachments/assets/e6cf9fe5-5b04-4c9d-bdbb-1038f380025d" />
-<img width="1919" height="986" alt="Captura de pantalla 2025-10-26 211053" src="https://github.com/user-attachments/assets/3303d727-e24a-4987-8de0-6d014985f555" />
-<img width="1908" height="960" alt="Captura de pantalla 2025-10-26 212501" src="https://github.com/user-attachments/assets/c49bbaaa-94f5-4856-abc6-0ac86ff55ffe" />
+<img width="1504" height="1003" alt="Captura de pantalla 2025-10-27 205452" src="https://github.com/user-attachments/assets/d95fdd2e-b88c-445c-9bb1-3e276176ed44" />
+<img width="1919" height="986" alt="Captura de pantalla 2025-10-26 211053" src="https://github.com/user-attachments/assets/bb61366d-da3c-4d9b-b9c0-c0dd9bde11b3" />
+<img width="1908" height="960" alt="Captura de pantalla 2025-10-26 212501" src="https://github.com/user-attachments/assets/7b0be504-bfdc-42ac-8289-b7c4f697568a" />
 
 ### 10.1 Common patterns
 - **Runtime:** Java 21 + `maven-shade-plugin` (fat JAR).
